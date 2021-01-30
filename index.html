@@ -59,22 +59,22 @@
             <div class="input-group f-class ">
                 <div>
                     <label for=" ">First Class ($150)</label>
-                    <input id="quantity-first-class " class="inp-style inp-width " type="number " name=" " value="1 ">
+                    <input id="first-class-quantity " class="inp-style inp-width " type="number " name=" " value="0 ">
                 </div>
                 <div class="plus-minus-btn ">
-                    <button id="button-increase " class="btn btn-default "><i class="fas fa-plus "></i></button>
-                    <button id="button-decrease " class="btn btn-default "><i class="fas fa-minus "></i></button>
+                    <button onclick=" ticketsQuantity( 'first-class', true) " class="btn btn-default "><i class="fas fa-plus "></i></button>
+                    <button onclick=" ticketsQuantity( 'first-class',false) " class="btn btn-default "><i class="fas fa-minus "></i></button>
                 </div>
             </div>
             
             <div class="input-group f-class ">
                 <div>
                     <label for=" ">Economy ($100)</label>
-                    <input id="quantity-economy " class="inp-style inp-width " type="number " name=" " value="0 ">
+                    <input id="economy-quantity " class="inp-style inp-width " type="number " name=" " value="0 ">
                 </div>
                 <div class="plus-minus-btn ">
-                    <button id="button-increase-economy " class="btn btn-default "><i class="fas fa-plus "></i></button>
-                    <button id="button-decrease-economy " class="btn btn-default "><i class="fas fa-minus "></i></button>
+                    <button onclick=" ticketsQuantity( 'economy' ,true) " class="btn btn-default "><i class="fas fa-plus "></i></button>
+                    <button onclick=" ticketsQuantity( 'economy' ,false) " class="btn btn-default "><i class="fas fa-minus "></i></button>
                 </div>
             </div>
             <div class="calculations ">
@@ -110,14 +110,52 @@
     </main>
 
   <script>
-  document.getElementById("button-increase-economy ").addEventListener('click',function(){
+
+
+  function ticketsQuantity(cruiseTicket,isIncrease){
+    const inputCount = document.getElementById(cruiseTicket + "-quantity ");
+    const countTickets = parseInt(inputCount.value);
+    let newTicketsCount = countTickets;
+
+   if(isIncrease == true){
+       newTicketsCount =  countTickets + 1;
+    }
+    if(isIncrease == false && countTickets > 0 ){
+       newTicketsCount =  countTickets - 1;
+    }
+    document.getElementById(cruiseTicket + "-quantity ").value = newTicketsCount;
+    subTotal()
+  }
+  /* 
+  function ticketsFirstClass(isIncrease){
+    const inputCount = document.getElementById("quantity-first-class ");
+    const countTickets = parseInt(inputCount.value);
+   let newTicketsCount = countTickets;
+   if(isIncrease == true){
+       newTicketsCount =  countTickets + 1;
+    }
+    if(isIncrease == false && countTickets > 0 ){
+       newTicketsCount =  countTickets - 1;
+    }
+    document.getElementById("quantity-first-class ").value = newTicketsCount;
+  }
+  function ticketsQuantity(isIncrease){
+    const inputCount = document.getElementById("quantity-economy ");
+    const countTickets = parseInt(inputCount.value);
+   let newTicketsCount = countTickets;
+   if(isIncrease == true){
+       newTicketsCount =  countTickets + 1;
+    }
+    if(isIncrease == false && countTickets > 0 ){
+       newTicketsCount =  countTickets - 1;
+    }
+    document.getElementById("quantity-economy ").value = newTicketsCount;
+  } */
+ /*  document.getElementById("button-increase-economy ").addEventListener('click',function(){
     const inputCount = document.getElementById("quantity-economy ");
     const countTickets = parseInt(inputCount.value);
     const newTicketsCount =  countTickets + 1;
     document.getElementById("quantity-economy ").value = newTicketsCount;
-
-    
- 
   })
   document.getElementById("button-decrease-economy ").addEventListener('click',function(){
     const inputCount = document.getElementById("quantity-economy ");
@@ -125,14 +163,28 @@
     const newTicketsCount =  countTickets - 1;
     document.getElementById("quantity-economy ").value = newTicketsCount;
     subTotal()
-  })
+  }) */
   function subTotal(){
-      const priceBeforeTax = document.getElementById("total-price ").innerText;
-      const priceTotal = parseFloat(priceBeforeTax );
-      let totalEconomyPrice = newTicketsCount * 100;
-      let totalFirstClass = newTicketsCount * 150;
-      document.getElementById("total-price ").innerText = priceTotal + totalEconomyPrice + totalFirstClass;
+      const firstClassTicketCount = ticketInputValue('first-class');
+
+      const economyTicketCount = ticketInputValue('economy');
+      const totalPrice =   firstClassTicketCount * 150 + economyTicketCount * 100;
+
+      document.getElementById("total-price ").innerText = totalPrice;
+
+      const tax = Math.round(totalPrice * 0.1);
+      document.getElementById("totalTax ").innerText = tax;
+
+      const grandtotal = totalPrice + tax;
+      document.getElementById("totalTicketPrice ").innerText=grandtotal;
       
+  }
+    function ticketInputValue(ticket){
+        console.log(ticket)
+      const ticketInput = document.getElementById(ticket + '-quantity ');
+      const ticketCount = parseInt(ticketInput.value);
+      console.log(ticketCount)
+      return ticketCount;
   }
   </script>
 </html>
