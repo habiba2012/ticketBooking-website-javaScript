@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curise Booking</title>
+    <title>Cruise Booking</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
@@ -62,8 +62,8 @@
                     <input id="first-class-quantity " class="inp-style inp-width " type="number " name=" " value="0 ">
                 </div>
                 <div class="plus-minus-btn ">
-                    <button onclick=" ticketsQuantity( 'first-class', true) " class="btn btn-default "><i class="fas fa-plus "></i></button>
-                    <button onclick=" ticketsQuantity( 'first-class',false) " class="btn btn-default "><i class="fas fa-minus "></i></button>
+                    <button onclick=" ticketsQuantity( 'first-class', true) " class="btn btn-default "><i class="fas fa-plus-circle " style="color:green "></i></button>
+                    <button onclick=" ticketsQuantity( 'first-class',false) " class="btn btn-default "><i class="fas fa-minus-circle " style="color:red "></i></button>
                 </div>
             </div>
             
@@ -73,8 +73,8 @@
                     <input id="economy-quantity " class="inp-style inp-width " type="number " name=" " value="0 ">
                 </div>
                 <div class="plus-minus-btn ">
-                    <button onclick=" ticketsQuantity( 'economy' ,true) " class="btn btn-default "><i class="fas fa-plus "></i></button>
-                    <button onclick=" ticketsQuantity( 'economy' ,false) " class="btn btn-default "><i class="fas fa-minus "></i></button>
+                    <button onclick=" ticketsQuantity( 'economy' ,true) " class="btn btn-default "><i class="fas fa-plus-circle "  style="color:green "></i></button>
+                    <button onclick=" ticketsQuantity( 'economy' ,false) " class="btn btn-default "><i class="fas fa-minus-circle " style="color:red "></i></button>
                 </div>
             </div>
             <div class="calculations ">
@@ -106,26 +106,26 @@
                 </div>
             </div>
             <button  class="btn-style modal-button ">Book Now</button>
-            
+
+            <!-- modal section -->
             <div class="modal-bg ">
                  <div class="modal ">
-                 <h2 id="modal-title ">Your Booking is confirmed.</h2>
+                 <h2 id="modal-title ">Your Booking is confirmed</h2>
                  <h3 id="modal-details ">Booking Details</h3>
                  <p>Total Tickets :  <span id="modal-total "></span></p>
                  <p>First Class : <span id="modal-first-class "></span></p>
                  <p >Economy : <span id="modal-economy "></span></p>
                  <p>Total Price: $ <span id="modal-price "></span></p>
-
-                 <span class="modal-close ">x</span>
+                 <span class="modal-close "><i class="fas fa-times-circle "></i></span>
                 </div>
             </div>
         </div>
     </main>
 
+<!-- JavaScript -->
   <script>
-
-
-  function ticketsQuantity(cruiseTicket,isIncrease){
+// Ticket number count
+function ticketsQuantity(cruiseTicket,isIncrease){
     const inputCount = document.getElementById(cruiseTicket + "-quantity ");
     const countTickets = parseInt(inputCount.value);
     let newTicketsCount = countTickets;
@@ -139,7 +139,8 @@
     document.getElementById(cruiseTicket + "-quantity ").value = newTicketsCount;
     subTotal()
   }
-function subTotal(){
+  // Subtotal price calculation
+    function subTotal(){
       const firstClassTicketCount = ticketInputValue('first-class');
 
       const economyTicketCount = ticketInputValue('economy');
@@ -154,13 +155,14 @@ function subTotal(){
       document.getElementById("totalTicketPrice ").innerText=grandtotal;
       
   }
+  // string to integer conversion function for input value
     function ticketInputValue(ticket){
         const ticketInput = document.getElementById(ticket + '-quantity ');
         const ticketCount = parseInt(ticketInput.value);
      
         return ticketCount;
   }
-//pop-up with modal
+    //pop-up with modal
     let modalBtn = document.querySelector('.modal-button');
     let modalBg = document.querySelector('.modal-bg');
     let modalClose = document.querySelector('.modal-close');
@@ -178,6 +180,8 @@ function subTotal(){
         document.getElementById("modal-first-class ").innerText = firstClassTicketCount;
         document.getElementById("modal-economy ").innerText = economyTicketCount ;
         document.getElementById("modal-price ").innerText = grandtotal;
+
+        document.getElementById("modal-title ").style.cssText ="background-color: cyan; height: 50px; width:100%; top:0; "
     });
 
         modalClose.addEventListener('click',function(){

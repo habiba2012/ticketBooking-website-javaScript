@@ -97,7 +97,6 @@ nav ul li a:hover, a.active{
     min-width: 300px;
 }
 .plus-minus-btn{
-    color: #3352F2;
     font-size: 30px;
     padding: 2px;
     margin: 10px 5px 0px 0px;
@@ -130,6 +129,7 @@ nav ul li a:hover, a.active{
     height: 100vh;
     top:0px;
     left:0;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     text-align:center;
@@ -154,7 +154,8 @@ nav ul li a:hover, a.active{
     margin-top: 200px;
     margin-right: 500px;
     box-shadow: 0 4px 8px 0 gray;  
-    border-radius: 5px; 
+    border-radius: 10px; 
+    margin-bottom: 2px;
 }
 
 .modal-close{
@@ -163,6 +164,4 @@ nav ul li a:hover, a.active{
     right:10px;
     cursor:pointer;
 }
-#modal-title {
-    
-}
+
