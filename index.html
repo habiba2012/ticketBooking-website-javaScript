@@ -105,7 +105,20 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style ">Book Now</button>
+            <button  class="btn-style modal-button ">Book Now</button>
+            
+            <div class="modal-bg ">
+                 <div class="modal ">
+                 <h2 id="modal-title ">Your Booking is confirmed.</h2>
+                 <h3 id="modal-details ">Booking Details</h3>
+                 <p>Total Tickets :  <span id="modal-total "></span></p>
+                 <p>First Class : <span id="modal-first-class "></span></p>
+                 <p >Economy : <span id="modal-economy "></span></p>
+                 <p>Total Price: $ <span id="modal-price "></span></p>
+
+                 <span class="modal-close ">x</span>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -126,45 +139,7 @@
     document.getElementById(cruiseTicket + "-quantity ").value = newTicketsCount;
     subTotal()
   }
-  /* 
-  function ticketsFirstClass(isIncrease){
-    const inputCount = document.getElementById("quantity-first-class ");
-    const countTickets = parseInt(inputCount.value);
-   let newTicketsCount = countTickets;
-   if(isIncrease == true){
-       newTicketsCount =  countTickets + 1;
-    }
-    if(isIncrease == false && countTickets > 0 ){
-       newTicketsCount =  countTickets - 1;
-    }
-    document.getElementById("quantity-first-class ").value = newTicketsCount;
-  }
-  function ticketsQuantity(isIncrease){
-    const inputCount = document.getElementById("quantity-economy ");
-    const countTickets = parseInt(inputCount.value);
-   let newTicketsCount = countTickets;
-   if(isIncrease == true){
-       newTicketsCount =  countTickets + 1;
-    }
-    if(isIncrease == false && countTickets > 0 ){
-       newTicketsCount =  countTickets - 1;
-    }
-    document.getElementById("quantity-economy ").value = newTicketsCount;
-  } */
- /*  document.getElementById("button-increase-economy ").addEventListener('click',function(){
-    const inputCount = document.getElementById("quantity-economy ");
-    const countTickets = parseInt(inputCount.value);
-    const newTicketsCount =  countTickets + 1;
-    document.getElementById("quantity-economy ").value = newTicketsCount;
-  })
-  document.getElementById("button-decrease-economy ").addEventListener('click',function(){
-    const inputCount = document.getElementById("quantity-economy ");
-    const countTickets = parseInt(inputCount.value);
-    const newTicketsCount =  countTickets - 1;
-    document.getElementById("quantity-economy ").value = newTicketsCount;
-    subTotal()
-  }) */
-  function subTotal(){
+function subTotal(){
       const firstClassTicketCount = ticketInputValue('first-class');
 
       const economyTicketCount = ticketInputValue('economy');
@@ -180,11 +155,35 @@
       
   }
     function ticketInputValue(ticket){
-        console.log(ticket)
-      const ticketInput = document.getElementById(ticket + '-quantity ');
-      const ticketCount = parseInt(ticketInput.value);
-      console.log(ticketCount)
-      return ticketCount;
+        const ticketInput = document.getElementById(ticket + '-quantity ');
+        const ticketCount = parseInt(ticketInput.value);
+     
+        return ticketCount;
   }
+//pop-up with modal
+    let modalBtn = document.querySelector('.modal-button');
+    let modalBg = document.querySelector('.modal-bg');
+    let modalClose = document.querySelector('.modal-close');
+
+    modalBtn.addEventListener('click',function(){
+        modalBg.classList.add('bg-active');
+
+        const firstClassTicketCount = ticketInputValue('first-class');
+        const economyTicketCount = ticketInputValue('economy');
+        const totalPrice =   firstClassTicketCount * 150 + economyTicketCount * 100;
+        const tax = Math.round(totalPrice * 0.1);
+        const grandtotal = totalPrice + tax;
+
+        document.getElementById("modal-total ").innerText = firstClassTicketCount + economyTicketCount ;
+        document.getElementById("modal-first-class ").innerText = firstClassTicketCount;
+        document.getElementById("modal-economy ").innerText = economyTicketCount ;
+        document.getElementById("modal-price ").innerText = grandtotal;
+    });
+
+        modalClose.addEventListener('click',function(){
+        modalBg.classList.remove('bg-active');
+    });
+
   </script>
+  
 </html>
